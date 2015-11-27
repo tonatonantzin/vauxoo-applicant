@@ -72,7 +72,7 @@ INSERT INTO `employee_hobby` (`id`, `name`, `description`) VALUES
 CREATE TABLE IF NOT EXISTS `employee_hobbyrel` (
   `id_employee` int(11) NOT NULL,
   `id_hobby` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) 
 
 --Valores
 INSERT INTO `employee_hobbyrel` (`id_employee`, `id_hobby`) VALUES
@@ -109,3 +109,42 @@ ALTER TABLE `employee`
 ALTER TABLE `employee_hobbyrel`
   ADD CONSTRAINT `employee_hobbyrel_ibfk_1` FOREIGN KEY (`id_hobby`) REFERENCES `employee_hobby` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `employee_hobbyrel_ibfk_2` FOREIGN KEY (`id_employee`) REFERENCES `employee` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+CREATE TABLE IF NOT EXISTS `employee_boss` (
+  `id` int(11) NOT NULL,
+  `id_employee` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--Valores
+INSERT INTO `employee_boss` (`id`, `id_employee`) VALUES
+(2, 2),
+(1, 3);
+
+
+CREATE TABLE IF NOT EXISTS `employee_bossrel` (
+  `id_boss` int(11) NOT NULL,
+  `id_employee` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--Valores
+INSERT INTO `employee_bossrel` (`id_boss`, `id_employee`) VALUES
+(1, 3),
+(1, 2);
+
+--Relaciones
+ALTER TABLE `employee_boss`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_employee` (`id_employee`);
+
+
+ALTER TABLE `employee_bossrel`
+  ADD KEY `id_employee` (`id_employee`),
+  ADD KEY `id_boss` (`id_boss`);
+
+ALTER TABLE `employee_boss`
+  ADD CONSTRAINT `employee_boss_ibfk_1` FOREIGN KEY (`id_employee`) REFERENCES `employee` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `employee_bossrel`
+  ADD CONSTRAINT `employee_bossrel_ibfk_1` FOREIGN KEY (`id_boss`) REFERENCES `employee_boss` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `employee_bossrel_ibfk_2` FOREIGN KEY (`id_employee`) REFERENCES `employee` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
