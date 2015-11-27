@@ -3,6 +3,8 @@
 --       You can create database locally to test it.
 --       Consider add ';' at end sentence.
 
+
+--sql1
 CREATE TABLE IF NOT EXISTS `employee` (
   `id` int(11) NOT NULL,
   `first_name` char(15) NOT NULL,
@@ -46,7 +48,64 @@ ALTER TABLE `employee_deparment`
 ALTER TABLE `employee`
   ADD CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`id_deparment`) REFERENCES `employee_deparment` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
-CREATE TABLE employee_hobby (
-);
 
--- ...
+
+
+
+--sql2
+
+
+CREATE TABLE IF NOT EXISTS `employee_hobby` (
+  `id` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `description` varchar(60) DEFAULT NULL
+) 
+
+--Valores
+INSERT INTO `employee_hobby` (`id`, `name`, `description`) VALUES
+(1, 'LECTURA', 'El acto de leer'),
+(2, 'CORRER', 'Hacer ejercicio'),
+(3, 'BAILAR', 'Diferentes generos');
+
+
+
+CREATE TABLE IF NOT EXISTS `employee_hobbyrel` (
+  `id_employee` int(11) NOT NULL,
+  `id_hobby` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--Valores
+INSERT INTO `employee_hobbyrel` (`id_employee`, `id_hobby`) VALUES
+(1, 1),
+(1, 2),
+(2, 1),
+(2, 2),
+(2, 3),
+(3, 2),
+(3, 3),
+(4, 1),
+(4, 3);
+
+--Relaciones
+ALTER TABLE `employee`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
+  ADD KEY `id_deparment` (`id_deparment`);
+
+ALTER TABLE `employee_deparment`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `employee_hobby`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+ALTER TABLE `employee_hobbyrel`
+  ADD KEY `id_employee` (`id_employee`),
+  ADD KEY `id_hobby` (`id_hobby`);
+
+ALTER TABLE `employee`
+  ADD CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`id_deparment`) REFERENCES `employee_deparment` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `employee_hobbyrel`
+  ADD CONSTRAINT `employee_hobbyrel_ibfk_1` FOREIGN KEY (`id_hobby`) REFERENCES `employee_hobby` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `employee_hobbyrel_ibfk_2` FOREIGN KEY (`id_employee`) REFERENCES `employee` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
