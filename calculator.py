@@ -1,16 +1,18 @@
-"""
-Your module documentation here
-"""
-
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+# Tonantzin Chavez 11/26/2015
+# Calcula la suma de 2 numeros enteros
 
 class CalculatorClass(object):
-    """
-    Your class documentation here
-    """
 
-    def sum(self, num_list):
-        """
-        Your method documentation here
-        """
-        # your sum code here
-        return "not implement yet"  # Remove this dummy line
+    
+    def sum(x,y):
+        res  = x + y
+        return res
+    while True:
+        try:
+            x = int(input("Ingrese Numero: "))
+            y = int(input("Ingrese Otro Numero: "))
+            print  Calculadora(x,y)
+        except:
+            print "Valor erroneo"
