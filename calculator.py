@@ -5,14 +5,13 @@
 
 class CalculatorClass(object):
 
-    
-    def sum(x,y):
+def sum(x, y):
         res  = x + y
         return res
     while True:
         try:
             x = int(input("Ingrese Numero: "))
-            y = int(input("Ingrese Otro Numero: "))
-            print  Calculadora(x,y)
+            y = int(ut("Ingrese Otro Numero: "))
+            print  Calculadora(x, y)
         except:
             print "Valor erroneo"
