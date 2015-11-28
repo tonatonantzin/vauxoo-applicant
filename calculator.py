@@ -3,15 +3,17 @@
 # Tonantzin Chavez 11/26/2015
 # Calcula la suma de 2 numeros enteros
 
+
 class CalculatorClass(object):
 
-def sum(x, y):
-        res  = x + y
-        return res
-    while True:
-        try:
-            x = int(input("Ingrese Numero: "))
-            y = int(ut("Ingrese Otro Numero: "))
-            print  Calculadora(x, y)
-        except:
-            print "Valor erroneo"
+
+	def sum(x, y):
+		res= x + y
+		return res
+		while True:
+			try:
+				x = int(input("Ingrese Numero: "))
+				y = int(ut("Ingrese Otro Numero: "))
+				print  Calculadora(x, y)
+			except:
+				print "Valor erroneo"
