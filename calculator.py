@@ -7,11 +7,11 @@
 class CalculatorClass:
     lista = []
     suma = 0
+    
     def llenarlista(self):
         x = int(raw_input("Ingrese longitud de la lista=>"))
         for i in range(x):
             self.lista.append(int(raw_input("Numero=>")))
-
 
     def sum(self):
         for i in self.lista:
