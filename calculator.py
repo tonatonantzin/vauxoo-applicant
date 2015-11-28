@@ -4,13 +4,12 @@
 # Calcula la suma de una lista de numeros enteros
 
 
-class CalculatorClass:
-    
-    
+class CalculatorClass(object):
+
     def __init__(self):
         self.lista = []
         self.suma = 0
-    
+
     def llenarlista(self):
         x = int(raw_input("Ingrese longitud de la lista=>"))
         for i in range(x):
