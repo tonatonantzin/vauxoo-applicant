@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS employee (
   id int PRIMARY KEY NOT NULL,
   first_name char(15) NOT NULL,
   last_name char(15) NOT NULL,
-  id_deparment int DEFAULT NULL
+  id_deparment int references employee_deparment(id)
 ) 
 
 -- Valores
@@ -36,9 +36,6 @@ INSERT INTO employee_deparment (‘id’, ‘name’, ‘description’) VALUES
 (6, 'MARKETING', 'Departamento encargado de publicidad');
 
 
---Relaciones
-ALTER TABLE employee
-  ADD KEY ‘id_deparment’ (‘id_deparment’);
 
 
 ALTER TABLE ‘employee’
@@ -66,8 +63,8 @@ INSERT INTO employee_hobby (‘id’, ‘name’, ‘description’) VALUES
 
 
 CREATE TABLE IF NOT EXISTS employee_hobbyrel (
-  ‘id_employee’ int NOT NULL,
-  ‘id_hobby’ int NOT NULL
+  ‘id_employee’ int NOT NULL REFERENCES employee(id),
+  ‘id_hobby’ int NOT NULL REFERENCES employee_hobby(id)
 ) 
 
 --Valores
@@ -83,16 +80,6 @@ INSERT INTO employee_hobbyrel (‘id_employee’, ‘id_hobby’) VALUES
 (4, 3);
 
 --Relaciones
-ALTER TABLE employee
-  ADD KEY ‘id_deparment’ (‘id_deparment’);
-
-ALTER TABLE ‘employee_deparment’
-  ADD PRIMARY KEY (‘id’);
-
-ALTER TABLE ‘employee_hobbyrel’
-  ADD KEY ‘id_employee’ (‘id_employee’),
-  ADD KEY ‘id_hobby’ (‘id_hobby’);
-
 ALTER TABLE ‘employee’
   ADD CONSTRAINT ‘employee_ibfk_1’ FOREIGN KEY (‘id_deparment’) REFERENCES ‘employee_deparment’ (‘id’) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -103,7 +90,7 @@ ALTER TABLE ‘employee_hobbyrel’
 
 CREATE TABLE IF NOT EXISTS ‘employee_boss’ (
   ‘id’ int PRIMARY KEY NOT NULL,
-  ‘id_employee’ int NOT NULL
+  ‘id_employee’ int NOT NULL REFERENCES employee (id)
 ) 
 
 --Valores
@@ -113,8 +100,8 @@ INSERT INTO employee_boss (‘id’, ‘id_employee’) VALUES
 
 
 CREATE TABLE IF NOT EXISTS ‘employee_bossrel’ (
-  ‘id_boss’ int NOT NULL,
-  ‘id_employee’ int NOT NULL
+  ‘id_boss’ int NOT NULL REFERENCES employee_boss(id),
+  ‘id_employee’ int NOT NULL REFERENCES employee(id)
 ) 
 
 --Valores
@@ -123,14 +110,6 @@ INSERT INTO ‘employee_bossrel’ (‘id_boss’, ‘id_employee’) VALUES
 (1, 2);
 
 --Relaciones
-ALTER TABLE ‘employee_boss’
-  ADD KEY ‘id_employee’ (‘id_employee’);
-
-
-ALTER TABLE ‘employee_bossrel’
-  ADD KEY ‘id_employee’ (‘id_employee’),
-  ADD KEY ‘id_boss’ (‘id_boss’);
-
 ALTER TABLE ‘employee_boss’
   ADD CONSTRAINT ‘employee_boss_ibfk_1’ FOREIGN KEY (‘id_employee’) REFERENCES ‘employee’ (‘id’) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
