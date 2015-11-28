@@ -4,9 +4,12 @@
 # Calcula si un numero es primo o no
 # Devuelve True o False
 
-class PrimeClass:
+class PrimeClass(object):
    
    
+   def __init__(self):
+        self.num = int(raw_input("Escribe numero => "))
+
     def is_prime(self):
         self.num = int(raw_input("Escribe numero => "))
         for i in range(2, self.num):
@@ -17,5 +20,5 @@ class PrimeClass:
             return True
 
 
-test = PrimeClass()
-test.is_prime()
+objeto = PrimeClass()
+objeto.is_prime()
