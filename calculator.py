@@ -5,8 +5,11 @@
 
 
 class CalculatorClass:
-    lista = []
-    suma = 0
+    
+    
+    def __init__(self):
+        self.lista = []
+        self.suma = 0
     
     def llenarlista(self):
         x = int(raw_input("Ingrese longitud de la lista=>"))
@@ -19,6 +22,6 @@ class CalculatorClass:
         print "Total=>", self.suma
 
 
-test = CalculatorClass()
-test.llenarlista()
-test.sum()
+objeto = CalculatorClass()
+objeto.llenarlista()
+objeto.sum()
