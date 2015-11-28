@@ -6,10 +6,10 @@
 
 --sql1
 CREATE TABLE IF NOT EXISTS employee (
-  id int NOT NULL,
+  id int PRIMARY KEY NOT NULL,
   first_name char(15) NOT NULL,
   last_name char(15) NOT NULL,
-  id_deparment int(11) DEFAULT NULL
+  id_deparment int DEFAULT NULL
 ) 
 
 -- Valores
@@ -21,7 +21,7 @@ INSERT INTO employee (id, first_name, last_name, id_deparment) VALUES
 
 
 CREATE TABLE IF NOT EXISTS employee_deparment (
-  ‘id’ int(11) NOT NULL,
+  ‘id’ int PRIMARY KEY NOT NULL,
   ‘name’ varchar(30) NOT NULL,
   ‘description’ varchar(50) DEFAULT NULL
 ) 
@@ -38,12 +38,8 @@ INSERT INTO employee_deparment (‘id’, ‘name’, ‘description’) VALUES
 
 --Relaciones
 ALTER TABLE employee
-  ADD PRIMARY KEY (‘id’),
-  ADD UNIQUE KEY ‘id’ (‘id’),
   ADD KEY ‘id_deparment’ (‘id_deparment’);
 
-ALTER TABLE employee_deparment
-  ADD PRIMARY KEY (‘id’);
 
 ALTER TABLE ‘employee’
   ADD CONSTRAINT ‘employee_ibfk_1’ FOREIGN KEY (‘id_deparment’) REFERENCES ‘employee_deparment’ (‘id’) ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -56,7 +52,7 @@ ALTER TABLE ‘employee’
 
 
 CREATE TABLE IF NOT EXISTS employee_hobby (
-  ‘id’ int(11) NOT NULL,
+  ‘id’ int PRIMARY KEY NOT NULL,
   ‘name’ varchar(30) NOT NULL,
   ‘description’ varchar(60) DEFAULT NULL
 ) 
@@ -70,8 +66,8 @@ INSERT INTO employee_hobby (‘id’, ‘name’, ‘description’) VALUES
 
 
 CREATE TABLE IF NOT EXISTS employee_hobbyrel (
-  ‘id_employee’ int(11) NOT NULL,
-  ‘id_hobby’ int(11) NOT NULL
+  ‘id_employee’ int NOT NULL,
+  ‘id_hobby’ int NOT NULL
 ) 
 
 --Valores
@@ -88,16 +84,10 @@ INSERT INTO employee_hobbyrel (‘id_employee’, ‘id_hobby’) VALUES
 
 --Relaciones
 ALTER TABLE employee
-  ADD PRIMARY KEY ('id'),
-  ADD UNIQUE KEY 'id' ('id'),
   ADD KEY ‘id_deparment’ (‘id_deparment’);
 
 ALTER TABLE ‘employee_deparment’
   ADD PRIMARY KEY (‘id’);
-
-ALTER TABLE ‘employee_hobby’
-  ADD PRIMARY KEY (‘id’),
-  ADD UNIQUE KEY ‘id’ (‘id’);
 
 ALTER TABLE ‘employee_hobbyrel’
   ADD KEY ‘id_employee’ (‘id_employee’),
@@ -112,20 +102,20 @@ ALTER TABLE ‘employee_hobbyrel’
 
 
 CREATE TABLE IF NOT EXISTS ‘employee_boss’ (
-  ‘id’ int(11) NOT NULL,
-  ‘id_employee’ int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  ‘id’ int PRIMARY KEY NOT NULL,
+  ‘id_employee’ int NOT NULL
+) 
 
 --Valores
-INSERT INTO ‘employee_boss’ (‘id’, ‘id_employee’) VALUES
+INSERT INTO employee_boss (‘id’, ‘id_employee’) VALUES
 (2, 2),
 (1, 3);
 
 
 CREATE TABLE IF NOT EXISTS ‘employee_bossrel’ (
-  ‘id_boss’ int(11) NOT NULL,
-  ‘id_employee’ int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  ‘id_boss’ int NOT NULL,
+  ‘id_employee’ int NOT NULL
+) 
 
 --Valores
 INSERT INTO ‘employee_bossrel’ (‘id_boss’, ‘id_employee’) VALUES
@@ -134,7 +124,6 @@ INSERT INTO ‘employee_bossrel’ (‘id_boss’, ‘id_employee’) VALUES
 
 --Relaciones
 ALTER TABLE ‘employee_boss’
-  ADD PRIMARY KEY (‘id’),
   ADD KEY ‘id_employee’ (‘id_employee’);
 
 
