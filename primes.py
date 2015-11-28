@@ -4,22 +4,19 @@
 # Calcula si un numero es primo o no
 # Devuelve True o False
 
-class PrimeClass(object):
+class PrimeClass:
    
    
-   def is_prime(num):
-      for i in range(2, num):
-         if (num % i) == 0:
-            return False
-         return True
-   while True:
-      try:
-         num = int(raw_input("Escribe numero => "))
-         if num == 0:
-            break
-         if is_prime(num):
-            print is_prime(num)
-         else:
-            print is_prime(num)
-      except:
-         print "Valor erroneo"
+    def is_prime(self):
+        self.num = int(raw_input("Escribe numero => "))
+        for i in range(2, self.num):
+            if (self.num % i) == 0: 
+                print "No primo"
+                return False
+            print "Primo"
+            return True
+
+  
+
+test = PrimeClass()
+test.is_prime()
