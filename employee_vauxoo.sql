@@ -6,7 +6,7 @@
 
 --sql1
 CREATE TABLE IF NOT EXISTS employee (
-  id int(11) NOT NULL,
+  id int NOT NULL,
   first_name char(15) NOT NULL,
   last_name char(15) NOT NULL,
   id_deparment int(11) DEFAULT NULL
