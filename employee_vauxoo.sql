@@ -6,17 +6,17 @@
 
 -- sql1
 CREATE TABLE IF NOT EXISTS employee (
-  id int  NOT NULL PRIMARY KEY,
+  id integer PRIMARY KEY,
   first_name char(15) NOT NULL,
   last_name char(15) NOT NULL,
-  id_deparment int references employee_deparment(id)
+  id_deparment integer references employee_deparment(id)
 );
 
 
 
 
 CREATE TABLE IF NOT EXISTS employee_deparment (
-  id int NOT NULL PRIMARY KEY ,
+  id integer RIMARY KEY ,
   name varchar(30) NOT NULL,
   description varchar(50) DEFAULT NULL
 ) ;
@@ -29,15 +29,15 @@ ALTER TABLE employee
 -- sql2
 
 CREATE TABLE IF NOT EXISTS employee_hobby (
-  id int  NOT NULL PRIMARY KEY,
+  id integer PRIMARY KEY,
   name varchar(30) NOT NULL,
   description varchar(60) DEFAULT NULL
 ) ;
 
 
 CREATE TABLE IF NOT EXISTS employee_hobbyrel (
-  id_employee int NOT NULL REFERENCES employee(id),
-  id_hobby int NOT NULL REFERENCES employee_hobby(id)
+  id_employee integer REFERENCES employee(id),
+  id_hobby integer REFERENCES employee_hobby(id)
 ) ;
 
 ALTER TABLE employee_hobbyrel
@@ -47,8 +47,8 @@ ALTER TABLE employee_hobbyrel
 
 
 CREATE TABLE IF NOT EXISTS employee_boss (
-  id int  NOT NULL PRIMARY KEY,
-  id_employee int NOT NULL REFERENCES employee (id)
+  id integer  PRIMARY KEY,
+  id_employee integer REFERENCES employee (id)
 ) ;
 
 ALTER TABLE employee_boss
@@ -56,8 +56,8 @@ ALTER TABLE employee_boss
 
 
 CREATE TABLE IF NOT EXISTS employee_bossrel (
-  id_boss int NOT NULL REFERENCES employee_boss(id),
-  id_employee int NOT NULL REFERENCES employee(id)
+  id_boss integer REFERENCES employee_boss(id),
+  id_employee integer REFERENCES employee(id)
 ) ;
 
 ALTER TABLE employee_bossrel
