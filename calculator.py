@@ -7,13 +7,13 @@
 class CalculatorClass(object):
 
 
-     def sum(x, y):
+    def sum(x, y):
         res = x + y
         return res
         while True:
-        try:
-	   x = int(input("Ingrese Numero: "))
-	   y = int(input("Ingrese Otro Numero: "))
-	   sum(x, y)
-	except:
-	   print "Valor erroneo"
+          try:
+	    x = int(input("Ingrese Numero: "))
+	    y = int(input("Ingrese Otro Numero: "))
+	    sum(x, y)
+          except:
+	    print "Valor erroneo"
