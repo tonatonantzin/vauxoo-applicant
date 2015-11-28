@@ -13,11 +13,17 @@ CREATE TABLE IF NOT EXISTS employee (
 );
 
 
+
+
 CREATE TABLE IF NOT EXISTS employee_deparment (
   id int NOT NULL PRIMARY KEY ,
   name varchar(30) NOT NULL,
   description varchar(50) DEFAULT NULL
 ) ;
+
+
+ALTER TABLE employee
+  ADD CONSTRAINT employee_ibfk_1 FOREIGN KEY (id_deparment) REFERENCES employee_deparment (id) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
 -- sql2
@@ -34,32 +40,25 @@ CREATE TABLE IF NOT EXISTS employee_hobbyrel (
   id_hobby int NOT NULL REFERENCES employee_hobby(id)
 ) ;
 
--- Sql3
+ALTER TABLE employee_hobbyrel
+  ADD CONSTRAINT employee_hobbyrel_ibfk_1 FOREIGN KEY (id_hobby) REFERENCES employee_hobby (id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT employee_hobbyrel_ibfk_2 FOREIGN KEY (id_employee) REFERENCES employee (id) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
 CREATE TABLE IF NOT EXISTS employee_boss (
   id int  NOT NULL PRIMARY KEY,
   id_employee int NOT NULL REFERENCES employee (id)
 ) ;
+
+ALTER TABLE employee_boss
+  ADD CONSTRAINT ‘employee_boss_ibfk_1’ FOREIGN KEY (id_employee) REFERENCES employee (id) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
 CREATE TABLE IF NOT EXISTS employee_bossrel (
   id_boss int NOT NULL REFERENCES employee_boss(id),
   id_employee int NOT NULL REFERENCES employee(id)
 ) ;
-
-
--- Relaciones
-
-ALTER TABLE employee
-  ADD CONSTRAINT employee_ibfk_1 FOREIGN KEY (id_deparment) REFERENCES employee_deparment (id) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-
-ALTER TABLE employee_hobbyrel
-  ADD CONSTRAINT employee_hobbyrel_ibfk_1 FOREIGN KEY (id_hobby) REFERENCES employee_hobby (id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT employee_hobbyrel_ibfk_2 FOREIGN KEY (id_employee) REFERENCES employee (id) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-
-ALTER TABLE employee_boss
-  ADD CONSTRAINT ‘employee_boss_ibfk_1’ FOREIGN KEY (id_employee) REFERENCES employee (id) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE employee_bossrel
   ADD CONSTRAINT employee_bossrel_ibfk_1 FOREIGN KEY (id_boss) REFERENCES employee_boss (id) ON DELETE NO ACTION ON UPDATE NO ACTION,
