@@ -5,9 +5,9 @@
 # Devuelve True o False
 
 class PrimeClass(object):
-   
-   
-   def __init__(self):
+
+
+    def __init__(self):
         self.num = int(raw_input("Escribe numero => "))
 
     def is_prime(self):
